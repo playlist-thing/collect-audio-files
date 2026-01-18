@@ -96,7 +96,7 @@ if __name__ == "__main__":
 
     # find audio files in directories
     items = []
-    for item in playlist["items"]:
+    for item in playlist["items"] + playlist["queue"]:
         if not "content" in item:
             continue # air break
 
