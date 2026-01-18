@@ -39,6 +39,8 @@ def ensure_ffmpeg_present():
 
 
 def get_output_name(item):
+    invalid_chars = ["<", ">", ":", "\"", "/", "\\", "|", "?", "*"]
+
     output_name_components = [f"{index + 1:02}"]
 
     if (title := item["content"]["title"]) != "":
@@ -48,6 +50,7 @@ def get_output_name(item):
         output_name_components.append(artist)
 
     name = " - ".join(output_name_components)
+    name = "".join(c for c in name if c not in invalid_chars)
     return f"{name}.mp3"
 
 
