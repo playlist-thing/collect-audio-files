@@ -119,7 +119,10 @@ if __name__ == "__main__":
 
         items.append((item, input_path))
 
-    # process
+    if os.path.exists(args.output_dir) and os.listdir(args.output_dir):
+        logging.error(f"Output directory '{args.output_dir}' is not empty")
+        sys.exit(1)
+
     os.makedirs(args.output_dir, exist_ok=True)
     for index, (item, input_path) in enumerate(items):
         process_file(index, item, input_path, args.output_dir)
