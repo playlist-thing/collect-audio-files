@@ -2,10 +2,10 @@
 
 import argparse
 import json
-import subprocess
 import logging
-import sys
 import os
+import subprocess
+import sys
 
 parser = argparse.ArgumentParser()
 parser.add_argument(
@@ -39,7 +39,7 @@ def ensure_ffmpeg_present():
 
 
 def get_output_name(item):
-    invalid_chars = ["<", ">", ":", "\"", "/", "\\", "|", "?", "*"]
+    invalid_chars = ["<", ">", ":", '"', "/", "\\", "|", "?", "*"]
 
     output_name_components = [f"{index + 1:02}"]
 
@@ -100,12 +100,12 @@ if __name__ == "__main__":
     # find audio files in directories
     items = []
     for item in playlist["items"] + playlist["queue"]:
-        if not "content" in item:
-            continue # air break
+        if "content" not in item:
+            continue  # air break
 
         content = item["content"]
-        if not "file" in content["attributes"]:
-            continue # no audio file linked
+        if "file" not in content["attributes"]:
+            continue  # no audio file linked
 
         file_name = content["attributes"]["file"]
 
