@@ -69,6 +69,9 @@ def process_file(index, item, input_path, output_dir):
     if (artist := item["content"]["artist"]) != "":
         args += ["-metadata", f"artist={artist}"]
 
+    if (album := item["content"]["album"]) != "":
+        args += ["-metadata", f"album={album}"]
+
     output_name = get_output_name(item)
     output_path = os.path.join(output_dir, output_name)
     args.append(output_path)
